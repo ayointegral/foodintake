@@ -36,12 +36,15 @@ export default function Landing() {
               Get personalized meal plans, track your nutrition, and achieve your health goals with our comprehensive health planner.
             </p>
             <div className="mt-10 flex items-center justify-center gap-6">
+              <Button size="lg" className="gap-2" onClick={() => setActiveDialog("signup")}>
+                Get Started <ChevronRight className="h-4 w-4" />
+              </Button>
+              
+              <Button variant="outline" size="lg" onClick={() => setActiveDialog("signin")}>
+                Sign In
+              </Button>
+
               <Dialog open={activeDialog === "signup"} onOpenChange={(open) => setActiveDialog(open ? "signup" : null)}>
-                <DialogTrigger asChild>
-                  <Button size="lg" className="gap-2">
-                    Get Started <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </DialogTrigger>
                 <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
                   <DialogHeader className="px-6 pt-6">
                     <DialogTitle className="text-2xl font-bold">
@@ -58,11 +61,6 @@ export default function Landing() {
               </Dialog>
               
               <Dialog open={activeDialog === "signin"} onOpenChange={(open) => setActiveDialog(open ? "signin" : null)}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" size="lg">
-                    Sign In
-                  </Button>
-                </DialogTrigger>
                 <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
                   <DialogHeader className="px-6 pt-6">
                     <DialogTitle className="text-2xl font-bold">
@@ -139,26 +137,9 @@ export default function Landing() {
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join thousands of users who have already started their journey to a healthier lifestyle with our comprehensive health planner.
           </p>
-          <Dialog open={activeDialog === "signup"} onOpenChange={(open) => setActiveDialog(open ? "signup" : null)}>
-            <DialogTrigger asChild>
-              <Button size="lg" className="gap-2">
-                Start Your Journey <ChevronRight className="h-4 w-4" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
-              <DialogHeader className="px-6 pt-6">
-                <DialogTitle className="text-2xl font-bold">
-                  Create an Account
-                </DialogTitle>
-                <DialogDescription className="text-muted-foreground">
-                  Start your health journey today
-                </DialogDescription>
-              </DialogHeader>
-              <div className="px-6 pb-6 pt-2">
-                <SignUp />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Button size="lg" className="gap-2" onClick={() => setActiveDialog("signup")}>
+            Start Your Journey <ChevronRight className="h-4 w-4" />
+          </Button>
         </div>
       </div>
     </div>
