@@ -34,34 +34,91 @@ export function registerRoutes(app: Express) {
   app.post("/api/auth/signup", async (req, res) => {
     try {
       const { password, ...userData } = req.body;
+      
+      // Validate required fields
+      if (!password || !userData.email || !userData.username || !userData.name) {
+        return res.status(400).json({ 
+          error: "Missing required fields" 
+        });
+      }
+
+      // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
       
+      // Create user with all required fields
       const user = await db.insert(users)
-        .values({ ...userData, password: hashedPassword })
+        .values({ 
+          ...userData,
+          password: hashedPassword,
+          activityLevel: userData.activityLevel || 'moderate',
+          dietaryPreferences: userData.dietaryPreferences || [],
+          goals: userData.goals || {
+            type: 'maintenance',
+            target: 0
+          }
+        })
         .returning();
       
+      // Generate JWT token
       const token = jwt.sign({ id: user[0].id }, JWT_SECRET);
-      res.json({ token, user: user[0] });
-    } catch (error) {
-      res.status(500).json({ error: "Failed to create user" });
+      
+      // Return user data (excluding password) and token
+      const { password: _, ...userWithoutPassword } = user[0];
+      res.json({ 
+        token, 
+        user: userWithoutPassword 
+      });
+    } catch (error: any) {
+      // Handle specific database errors
+      if (error.code === '23505') { // Unique violation
+        return res.status(409).json({ 
+          error: "Email or username already exists" 
+        });
+      }
+      console.error('Signup error:', error);
+      res.status(500).json({ 
+        error: "Failed to create user" 
+      });
     }
   });
 
   app.post("/api/auth/signin", async (req, res) => {
     try {
       const { email, password } = req.body;
+      
+      // Validate input
+      if (!email || !password) {
+        return res.status(400).json({ 
+          error: "Email and password are required" 
+        });
+      }
+
+      // Find user
       const user = await db.query.users.findFirst({
         where: eq(users.email, email),
       });
 
+      // Check password
       if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ error: "Invalid credentials" });
+        return res.status(401).json({ 
+          error: "Invalid email or password" 
+        });
       }
 
+      // Generate token
       const token = jwt.sign({ id: user.id }, JWT_SECRET);
-      res.json({ token, user });
+      
+      // Return user data without password
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ 
+        token, 
+        user: userWithoutPassword 
+      });
     } catch (error) {
-      res.status(500).json({ error: "Authentication failed" });
+      console.error('Signin error:', error);
+      res.status(500).json({ 
+        error: "Authentication failed" 
+      });
     }
   });
 
