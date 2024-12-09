@@ -6,7 +6,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Card,
@@ -45,8 +44,9 @@ export default function Landing() {
               </Button>
 
               <Dialog open={activeDialog === "signup"} onOpenChange={(open) => setActiveDialog(open ? "signup" : null)}>
-                <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
-                  <DialogHeader className="px-6 pt-6">
+                <DialogContent className="relative sm:max-w-md bg-background/5 backdrop-blur-[8px] border border-white/10 shadow-[0_0_1rem_0_rgba(0,0,0,0.2)] dark:shadow-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/5 dark:from-white/5 dark:to-white/2.5 rounded-[inherit]" />
+                  <DialogHeader className="relative px-6 pt-6">
                     <DialogTitle className="text-2xl font-bold">
                       Create an Account
                     </DialogTitle>
@@ -54,15 +54,16 @@ export default function Landing() {
                       Start your health journey today
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="px-6 pb-6 pt-2">
+                  <div className="relative px-6 pb-6 pt-2">
                     <SignUp />
                   </div>
                 </DialogContent>
               </Dialog>
               
               <Dialog open={activeDialog === "signin"} onOpenChange={(open) => setActiveDialog(open ? "signin" : null)}>
-                <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
-                  <DialogHeader className="px-6 pt-6">
+                <DialogContent className="relative sm:max-w-md bg-background/5 backdrop-blur-[8px] border border-white/10 shadow-[0_0_1rem_0_rgba(0,0,0,0.2)] dark:shadow-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/5 dark:from-white/5 dark:to-white/2.5 rounded-[inherit]" />
+                  <DialogHeader className="relative px-6 pt-6">
                     <DialogTitle className="text-2xl font-bold">
                       Welcome Back
                     </DialogTitle>
@@ -70,7 +71,7 @@ export default function Landing() {
                       Sign in to your account
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="px-6 pb-6 pt-2">
+                  <div className="relative px-6 pb-6 pt-2">
                     <SignIn />
                   </div>
                 </DialogContent>
