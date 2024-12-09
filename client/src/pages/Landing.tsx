@@ -25,7 +25,7 @@ export default function Landing() {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-background backdrop-blur-[2px]" />
         <div className="container mx-auto px-4 py-24 relative">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
@@ -41,10 +41,12 @@ export default function Landing() {
                     Get Started <ChevronRight className="h-4 w-4" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md backdrop-blur-xl bg-white/80">
+                <DialogContent className="sm:max-w-md bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
                   <DialogHeader>
-                    <DialogTitle>Create an Account</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                      Create an Account
+                    </DialogTitle>
+                    <DialogDescription className="text-muted-foreground/90">
                       Start your health journey today
                     </DialogDescription>
                   </DialogHeader>
@@ -58,10 +60,12 @@ export default function Landing() {
                     Sign In
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md backdrop-blur-xl bg-white/80">
+                <DialogContent className="sm:max-w-md bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
                   <DialogHeader>
-                    <DialogTitle>Welcome Back</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                      Welcome Back
+                    </DialogTitle>
+                    <DialogDescription className="text-muted-foreground/90">
                       Sign in to your account
                     </DialogDescription>
                   </DialogHeader>
