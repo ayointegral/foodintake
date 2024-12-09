@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -134,11 +133,24 @@ export default function Landing() {
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join thousands of users who have already started their journey to a healthier lifestyle with our comprehensive health planner.
           </p>
-          <Link href="/signup">
-            <Button size="lg" className="gap-2">
-              Start Your Journey <ChevronRight className="h-4 w-4" />
-            </Button>
-          </Link>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="lg" className="gap-2">
+                Start Your Journey <ChevronRight className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                  Create an Account
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground">
+                  Start your health journey today
+                </DialogDescription>
+              </DialogHeader>
+              <SignUp />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
