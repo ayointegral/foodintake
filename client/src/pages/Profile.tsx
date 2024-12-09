@@ -39,7 +39,10 @@ export default function Profile() {
           <CardContent className="pt-6">
             <div className="flex flex-col items-center md:flex-row md:items-start md:space-x-6">
               <Avatar className="h-24 w-24">
-                <AvatarImage src="https://i.pravatar.cc/96" />
+                <AvatarImage 
+                  src={profile?.id ? `https://api.dicebear.com/7.x/initials/svg?seed=${profile.id}` : ''} 
+                  alt={profile?.name || "User"}
+                />
                 <AvatarFallback>
                   {profile?.name?.charAt(0) || "U"}
                 </AvatarFallback>
