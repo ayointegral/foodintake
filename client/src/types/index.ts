@@ -13,7 +13,7 @@ export interface User {
     type: 'weight_loss' | 'muscle_gain' | 'maintenance';
     target: number;
   };
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export interface NutritionData {
