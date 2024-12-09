@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 const signInSchema = z.object({
@@ -66,7 +65,7 @@ export default function SignIn() {
                   <Input 
                     type="email" 
                     {...field}
-                    className="h-9 px-3 py-1 text-sm transition-colors bg-white rounded-md border border-input focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -83,7 +82,7 @@ export default function SignIn() {
                   <Input 
                     type="password" 
                     {...field}
-                    className="h-9 px-3 py-1 text-sm transition-colors bg-white rounded-md border border-input focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />

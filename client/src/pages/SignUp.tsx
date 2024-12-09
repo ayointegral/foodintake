@@ -144,7 +144,7 @@ export default function SignUp() {
 
           <Button 
             type="submit" 
-            className="w-full h-9 px-3 py-1 text-sm transition-colors rounded-md bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm" 
+            className="w-full h-9 px-3 py-1 text-sm font-medium transition-colors bg-[#4CAF50] hover:bg-[#45a049] text-white rounded-md" 
             disabled={loading}
           >
             {loading ? "Creating account..." : "Create account"}
@@ -153,7 +153,7 @@ export default function SignUp() {
       </Form>
       <div className="text-center text-sm">
         <span className="text-muted-foreground">Already have an account? </span>
-        <Link href="/signin" className="text-primary hover:underline font-medium">
+        <Link href="/signin" className="text-[#4CAF50] hover:underline font-medium">
           Sign in
         </Link>
       </div>
