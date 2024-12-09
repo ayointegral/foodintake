@@ -20,6 +20,8 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 export default function Landing() {
+  const [activeDialog, setActiveDialog] = useState<"signin" | "signup" | null>(null);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -34,7 +36,7 @@ export default function Landing() {
               Get personalized meal plans, track your nutrition, and achieve your health goals with our comprehensive health planner.
             </p>
             <div className="mt-10 flex items-center justify-center gap-6">
-              <Dialog>
+              <Dialog open={activeDialog === "signup"} onOpenChange={(open) => setActiveDialog(open ? "signup" : null)}>
                 <DialogTrigger asChild>
                   <Button size="lg" className="gap-2">
                     Get Started <ChevronRight className="h-4 w-4" />
@@ -49,11 +51,13 @@ export default function Landing() {
                       Start your health journey today
                     </DialogDescription>
                   </DialogHeader>
-                  <SignUp />
+                  <div className="px-4 py-2">
+                    <SignUp />
+                  </div>
                 </DialogContent>
               </Dialog>
               
-              <Dialog>
+              <Dialog open={activeDialog === "signin"} onOpenChange={(open) => setActiveDialog(open ? "signin" : null)}>
                 <DialogTrigger asChild>
                   <Button variant="outline" size="lg">
                     Sign In
@@ -68,7 +72,9 @@ export default function Landing() {
                       Sign in to your account
                     </DialogDescription>
                   </DialogHeader>
-                  <SignIn />
+                  <div className="px-4 py-2">
+                    <SignIn />
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
@@ -133,7 +139,7 @@ export default function Landing() {
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join thousands of users who have already started their journey to a healthier lifestyle with our comprehensive health planner.
           </p>
-          <Dialog>
+          <Dialog open={activeDialog === "signup"} onOpenChange={(open) => setActiveDialog(open ? "signup" : null)}>
             <DialogTrigger asChild>
               <Button size="lg" className="gap-2">
                 Start Your Journey <ChevronRight className="h-4 w-4" />
@@ -148,7 +154,9 @@ export default function Landing() {
                   Start your health journey today
                 </DialogDescription>
               </DialogHeader>
-              <SignUp />
+              <div className="px-4 py-2">
+                <SignUp />
+              </div>
             </DialogContent>
           </Dialog>
         </div>
