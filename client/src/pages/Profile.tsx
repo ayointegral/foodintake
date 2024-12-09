@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { UserProfile, NutritionData } from "../types";
+import type { User, NutritionData } from "../types";
 
 export default function Profile() {
-  const { data: profile } = useQuery<UserProfile>({
+  const { data: profile } = useQuery<User>({
     queryKey: ["profile"],
     queryFn: async () => {
       const response = await fetch("/api/users/1"); // TODO: Get from auth

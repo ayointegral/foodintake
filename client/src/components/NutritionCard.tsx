@@ -28,8 +28,7 @@ export function NutritionCard({ title, current, target, unit, color = "bg-primar
         </div>
         <Progress
           value={progress}
-          className="mt-2"
-          indicatorClassName={color}
+          className={`mt-2 ${color}`}
         />
         <p className="text-xs text-muted-foreground mt-2">
           {progress.toFixed(0)}% of daily goal

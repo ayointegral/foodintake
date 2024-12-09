@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import NutritionCard from "../components/NutritionCard";
 import ProgressChart from "../components/ProgressChart";
 import MealCard from "../components/MealCard";
+import type { Meal } from "../types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity } from "lucide-react";
 
@@ -85,7 +86,7 @@ export default function Dashboard() {
         <div className="mt-6">
           <h2 className="text-2xl font-bold mb-4">Today's Meals</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {todaysMeals?.map((meal) => (
+            {todaysMeals?.map((meal: Meal) => (
               <MealCard key={meal.id} meal={meal} />
             ))}
           </div>

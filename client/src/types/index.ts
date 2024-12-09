@@ -1,5 +1,6 @@
-export interface UserProfile {
+export interface User {
   id: number;
+  username: string;
   name: string;
   email: string;
   age: number;
@@ -12,6 +13,7 @@ export interface UserProfile {
     type: 'weight_loss' | 'muscle_gain' | 'maintenance';
     target: number;
   };
+  createdAt: Date;
 }
 
 export interface NutritionData {
