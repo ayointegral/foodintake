@@ -44,7 +44,8 @@ export async function signUp(userData: any) {
     body: userData,
   });
   
-  localStorage.setItem('token', data.token);
+  // Don't automatically set token on signup
+  // Let the user verify their email first
   return data.user;
 }
 

@@ -1,5 +1,14 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Card,
   CardContent,
@@ -8,6 +17,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChevronRight, Utensils, Activity, Brain, Heart } from "lucide-react";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 export default function Landing() {
   return (
@@ -24,16 +35,39 @@ export default function Landing() {
               Get personalized meal plans, track your nutrition, and achieve your health goals with our comprehensive health planner.
             </p>
             <div className="mt-10 flex items-center justify-center gap-6">
-              <Link href="/signup">
-                <Button size="lg" className="gap-2">
-                  Get Started <ChevronRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/signin">
-                <Button variant="outline" size="lg">
-                  Sign In
-                </Button>
-              </Link>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="gap-2">
+                    Get Started <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md backdrop-blur-xl bg-white/80">
+                  <DialogHeader>
+                    <DialogTitle>Create an Account</DialogTitle>
+                    <DialogDescription>
+                      Start your health journey today
+                    </DialogDescription>
+                  </DialogHeader>
+                  <SignUp />
+                </DialogContent>
+              </Dialog>
+              
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="lg">
+                    Sign In
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md backdrop-blur-xl bg-white/80">
+                  <DialogHeader>
+                    <DialogTitle>Welcome Back</DialogTitle>
+                    <DialogDescription>
+                      Sign in to your account
+                    </DialogDescription>
+                  </DialogHeader>
+                  <SignIn />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { AuthContext, signIn, signOut, signUp, getCurrentUser } from "../lib/auth";
 import type { User } from "../types";
+import { useToast } from "@/hooks/use-toast";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [_, setLocation] = useLocation();
+  const { toast } = useToast();
 
   useEffect(() => {
     async function loadUser() {
@@ -18,6 +20,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const userData = await getCurrentUser();
         if (userData) {
           setUser(userData);
+          if (window.location.pathname === '/') {
+            setLocation('/dashboard');
+          }
         }
       } catch (error) {
         console.error("Failed to load user:", error);
@@ -32,7 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const userData = await signIn(email, password);
       setUser(userData);
-      setLocation("/");
+      setLocation("/dashboard");
     } catch (error) {
       throw error;
     }
@@ -42,7 +47,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await signOut();
       setUser(null);
-      setLocation("/signin");
+      setLocation("/");
     } catch (error) {
       throw error;
     }
@@ -50,10 +55,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const handleSignUp = async (userData: Omit<User, "id">) => {
     try {
-      const newUser = await signUp(userData);
-      setUser(newUser);
-      setLocation("/onboarding");
+      await signUp(userData);
+      toast({
+        title: "Account created successfully!",
+        description: "Please check your email for verification.",
+      });
+      // Don't set user or redirect yet - wait for email verification
     } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create account. Please try again.",
+        variant: "destructive",
+      });
       throw error;
     }
   };
