@@ -14,12 +14,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     // Check if user is already authenticated
-    fetch("/api/auth/me")
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
+    fetch("/api/auth/me", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then(async (res) => {
         if (res.ok) {
           const userData = await res.json();
           setUser(userData);
+        } else {
+          // If token is invalid, remove it
+          localStorage.removeItem('token');
         }
+      })
+      .catch(() => {
+        localStorage.removeItem('token');
       })
       .finally(() => setLoading(false));
   }, []);

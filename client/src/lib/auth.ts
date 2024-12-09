@@ -34,17 +34,13 @@ export async function signIn(email: string, password: string) {
     throw new Error("Authentication failed");
   }
   
-  return response.json();
+  const data = await response.json();
+  localStorage.setItem('token', data.token);
+  return data.user;
 }
 
 export async function signOut() {
-  const response = await fetch("/api/auth/signout", {
-    method: "POST",
-  });
-  
-  if (!response.ok) {
-    throw new Error("Sign out failed");
-  }
+  localStorage.removeItem('token');
 }
 
 export async function signUp(userData: Omit<User, "id">) {
@@ -58,5 +54,7 @@ export async function signUp(userData: Omit<User, "id">) {
     throw new Error("Sign up failed");
   }
   
-  return response.json();
+  const data = await response.json();
+  localStorage.setItem('token', data.token);
+  return data.user;
 }
