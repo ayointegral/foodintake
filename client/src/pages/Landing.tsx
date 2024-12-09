@@ -42,16 +42,16 @@ export default function Landing() {
                     Get Started <ChevronRight className="h-4 w-4" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
+                  <DialogHeader className="px-6 pt-6">
+                    <DialogTitle className="text-2xl font-bold">
                       Create an Account
                     </DialogTitle>
                     <DialogDescription className="text-muted-foreground">
                       Start your health journey today
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="px-4 py-2">
+                  <div className="px-6 pb-6 pt-2">
                     <SignUp />
                   </div>
                 </DialogContent>
@@ -63,16 +63,16 @@ export default function Landing() {
                     Sign In
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
+                  <DialogHeader className="px-6 pt-6">
+                    <DialogTitle className="text-2xl font-bold">
                       Welcome Back
                     </DialogTitle>
                     <DialogDescription className="text-muted-foreground">
                       Sign in to your account
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="px-4 py-2">
+                  <div className="px-6 pb-6 pt-2">
                     <SignIn />
                   </div>
                 </DialogContent>
@@ -145,16 +145,16 @@ export default function Landing() {
                 Start Your Journey <ChevronRight className="h-4 w-4" />
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+            <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-md border border-border/30 shadow-lg">
+              <DialogHeader className="px-6 pt-6">
+                <DialogTitle className="text-2xl font-bold">
                   Create an Account
                 </DialogTitle>
                 <DialogDescription className="text-muted-foreground">
                   Start your health journey today
                 </DialogDescription>
               </DialogHeader>
-              <div className="px-4 py-2">
+              <div className="px-6 pb-6 pt-2">
                 <SignUp />
               </div>
             </DialogContent>
