@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import { AuthContext, signIn, signOut, signUp } from "../lib/auth";
+import { AuthContext, signIn, signOut, signUp, getCurrentUser } from "../lib/auth";
 import type { User } from "../types";
 
 interface AuthProviderProps {
@@ -13,31 +13,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [_, setLocation] = useLocation();
 
   useEffect(() => {
-    // Check if user is already authenticated
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
-    fetch("/api/auth/me", {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(async (res) => {
-        if (res.ok) {
-          const userData = await res.json();
+    async function loadUser() {
+      try {
+        const userData = await getCurrentUser();
+        if (userData) {
           setUser(userData);
-        } else {
-          // If token is invalid, remove it
-          localStorage.removeItem('token');
         }
-      })
-      .catch(() => {
-        localStorage.removeItem('token');
-      })
-      .finally(() => setLoading(false));
+      } catch (error) {
+        console.error("Failed to load user:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadUser();
   }, []);
 
   const handleSignIn = async (email: string, password: string) => {

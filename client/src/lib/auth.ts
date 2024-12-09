@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import type { User } from "../types";
+import { api } from "./api";
 
 interface AuthContextType {
   user: User | null;
@@ -24,17 +25,11 @@ export function useAuth() {
 }
 
 export async function signIn(email: string, password: string) {
-  const response = await fetch("/api/auth/signin", {
+  const data = await api("/auth/signin", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: { email, password },
   });
   
-  if (!response.ok) {
-    throw new Error("Authentication failed");
-  }
-  
-  const data = await response.json();
   localStorage.setItem('token', data.token);
   return data.user;
 }
@@ -43,18 +38,24 @@ export async function signOut() {
   localStorage.removeItem('token');
 }
 
-export async function signUp(userData: Omit<User, "id">) {
-  const response = await fetch("/api/auth/signup", {
+export async function signUp(userData: any) {
+  const data = await api("/auth/signup", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
+    body: userData,
   });
   
-  if (!response.ok) {
-    throw new Error("Sign up failed");
-  }
-  
-  const data = await response.json();
   localStorage.setItem('token', data.token);
   return data.user;
+}
+
+export async function getCurrentUser() {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+  
+  try {
+    return await api("/auth/me");
+  } catch {
+    localStorage.removeItem('token');
+    return null;
+  }
 }
