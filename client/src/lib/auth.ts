@@ -39,14 +39,21 @@ export async function signOut() {
 }
 
 export async function signUp(userData: any) {
-  const data = await api("/auth/signup", {
-    method: "POST",
-    body: userData,
-  });
-  
-  // Don't automatically set token on signup
-  // Let the user verify their email first
-  return data.user;
+  try {
+    const data = await api("/auth/signup", {
+      method: "POST",
+      body: userData,
+    });
+    
+    // Don't set token or auto-login on signup
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    
+    return data.user;
+  } catch (error: any) {
+    throw new Error(error.message || "Failed to create account");
+  }
 }
 
 export async function getCurrentUser() {

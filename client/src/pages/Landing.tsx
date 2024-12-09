@@ -41,12 +41,12 @@ export default function Landing() {
                     Get Started <ChevronRight className="h-4 w-4" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
+                <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
                   <DialogHeader>
-                    <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
                       Create an Account
                     </DialogTitle>
-                    <DialogDescription className="text-muted-foreground/90">
+                    <DialogDescription className="text-muted-foreground">
                       Start your health journey today
                     </DialogDescription>
                   </DialogHeader>
@@ -60,12 +60,12 @@ export default function Landing() {
                     Sign In
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
+                <DialogContent className="sm:max-w-md bg-background/95 backdrop-blur-xl border border-border/40 shadow-2xl rounded-xl">
                   <DialogHeader>
-                    <DialogTitle className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
                       Welcome Back
                     </DialogTitle>
-                    <DialogDescription className="text-muted-foreground/90">
+                    <DialogDescription className="text-muted-foreground">
                       Sign in to your account
                     </DialogDescription>
                   </DialogHeader>

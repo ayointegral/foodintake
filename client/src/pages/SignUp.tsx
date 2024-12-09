@@ -44,20 +44,17 @@ export default function SignUp() {
         weight: 70,
         height: 170,
         activityLevel: "moderate",
-        dietaryPreferences: ["balanced"],
+        dietaryPreferences: [],
         goals: {
           type: "maintenance",
           target: 70,
         },
       });
-      toast({
-        title: "Account created!",
-        description: "Please check your email for verification.",
-      });
-    } catch (error) {
+    } catch (error: any) {
+      const errorMessage = error?.message || "Failed to create account. Please try again.";
       toast({
         title: "Error",
-        description: "Failed to create account",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

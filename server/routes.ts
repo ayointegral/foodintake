@@ -42,6 +42,18 @@ export function registerRoutes(app: Express) {
         });
       }
 
+      // Check if email or username already exists
+      const existingUser = await db.query.users.findFirst({
+        where: (users, { or, eq }) => 
+          or(eq(users.email, userData.email), eq(users.username, userData.username))
+      });
+
+      if (existingUser) {
+        return res.status(409).json({
+          error: "Email or username already exists"
+        });
+      }
+
       // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
       
@@ -59,25 +71,17 @@ export function registerRoutes(app: Express) {
         })
         .returning();
       
-      // Generate JWT token
-      const token = jwt.sign({ id: user[0].id }, JWT_SECRET);
-      
-      // Return user data (excluding password) and token
+      // Return user data without password and without generating token
+      // User needs to sign in separately after account creation
       const { password: _, ...userWithoutPassword } = user[0];
       res.json({ 
-        token, 
-        user: userWithoutPassword 
+        user: userWithoutPassword,
+        message: "Account created successfully. Please sign in to continue."
       });
     } catch (error: any) {
-      // Handle specific database errors
-      if (error.code === '23505') { // Unique violation
-        return res.status(409).json({ 
-          error: "Email or username already exists" 
-        });
-      }
       console.error('Signup error:', error);
       res.status(500).json({ 
-        error: "Failed to create user" 
+        error: error.message || "Failed to create user" 
       });
     }
   });

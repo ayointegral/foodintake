@@ -2,6 +2,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic } from "./vite";
 import { createServer } from "http";
+import { db } from "../db";
+
+// Initialize environment variables
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
 function log(message: string) {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -49,8 +53,13 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  registerRoutes(app);
-  const server = createServer(app);
+  try {
+    // Test database connection
+    await db.query.users.findMany({ limit: 1 });
+    log('Database connection successful');
+
+    registerRoutes(app);
+    const server = createServer(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -74,5 +83,12 @@ app.use((req, res, next) => {
   const PORT = 5000;
   server.listen(PORT, "0.0.0.0", () => {
     log(`serving on port ${PORT}`);
+  }).on('error', (error: any) => {
+    console.error('Server error:', error);
+    process.exit(1);
   });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
 })();
