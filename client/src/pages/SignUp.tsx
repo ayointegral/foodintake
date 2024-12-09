@@ -32,6 +32,12 @@ export default function SignUp() {
 
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      username: "",
+      name: "",
+      email: "",
+      password: "",
+    },
   });
 
   async function onSubmit(values: SignUpValues) {
@@ -63,19 +69,22 @@ export default function SignUp() {
   }
 
   return (
-    <div className="space-y-6 py-4">
+    <div className="space-y-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
           <FormField
             control={form.control}
             name="username"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
+              <FormItem className="space-y-1">
+                <FormLabel className="text-sm font-medium">Username</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input 
+                    {...field}
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
@@ -84,12 +93,15 @@ export default function SignUp() {
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
+              <FormItem className="space-y-1">
+                <FormLabel className="text-sm font-medium">Full Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input 
+                    {...field}
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
@@ -98,12 +110,16 @@ export default function SignUp() {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
+              <FormItem className="space-y-1">
+                <FormLabel className="text-sm font-medium">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" {...field} />
+                  <Input 
+                    type="email"
+                    {...field}
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
@@ -112,24 +128,32 @@ export default function SignUp() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
+              <FormItem className="space-y-1">
+                <FormLabel className="text-sm font-medium">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input 
+                    type="password"
+                    {...field}
+                    className="h-9 px-3 py-1 text-sm transition-colors rounded-md border border-input bg-background/50 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button 
+            type="submit" 
+            className="w-full h-9 px-3 py-1 text-sm transition-colors rounded-md bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm" 
+            disabled={loading}
+          >
             {loading ? "Creating account..." : "Create account"}
           </Button>
         </form>
       </Form>
       <div className="text-center text-sm">
         <span className="text-muted-foreground">Already have an account? </span>
-        <Link href="/signin" className="text-primary hover:underline">
+        <Link href="/signin" className="text-primary hover:underline font-medium">
           Sign in
         </Link>
       </div>
